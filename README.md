@@ -21,6 +21,8 @@ There are two euristics beyond those rules:
 
 ## Object Calisthenics rules
 
+![image info](./object_calisthenics_rules_infographic.pdf)
+
 1. Only one level of indentation per method
 
     *You should only keep one level of indentation per method, avoiding the nest of commands; it helps to ensure that a method focuses on doing **only one thing** and reduce the size of methods, enabling easier reuse.* 
