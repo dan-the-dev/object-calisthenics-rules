@@ -21,63 +21,76 @@ There are two euristics beyond those rules:
 
 ## Object Calisthenics rules
 
-1. Only one level of indentation per method
+**1. Only one level of indentation per method**
 
-    *You should only keep one level of indentation per method, avoiding the nest of commands; it helps to ensure that a method focuses on doing **only one thing** and reduce the size of methods, enabling easier reuse. This approach favors readability and simplicity, resulting in methods with a main line for their main responsibilities, ending in the last line of method, and some special cases handled in the path. A techniques to avoid levels of indentetation is using guards to create an exit for special cases:* 
-
-	class Example {
-		public function isBetween0And10(int $a) {
-			if ($a > 0) {
-				if ($a < 10) {
-					return true;
-				}
+You should only keep one level of indentation per method, avoiding the nest of commands; it helps to ensure that a method focuses on doing **only one thing** and reduce the size of methods, enabling easier reuse. This approach favors readability and simplicity, resulting in methods with a main line for their main responsibilities, ending in the last line of method, and some special cases handled in the path. A techniques to avoid levels of indentation is using guards to create an exit for special cases.
+	
+```php
+/** AVOID THIS */
+class Example {
+	public function doSomething(int $a) {
+		if ($a > 0) {
+			if ($a < 10) {
+				return true;
 			}
-			return false;
 		}
+		return false;
 	}
-
-
-	class Example {
-		public function isBetween1And10/int $a) {
-			if ($a < 0 || $a > 10) {
-				// this is a guard: a conditional that makes a control and returns if it does not pass
-				return false;
-			}
+}
+```
+See how we can remove the multiple indentation and simplify our code:
+	
+```php
+/** DO THIS INSTEAD */
+class Example {
+	public function isBetween1And10(int $a) {
+		if ($a > 0) {
+			return $this-> checkIfLowerThan10($a);
+		}
+		return false;
+	}
+	
+	public function checkIfLowerThan10(int $a) {
+		if ($a < 10) {
 			return true;
 		}
+		return false;
 	}
-2. Don't use the "else" keyword
+}
+```
 
-    *It promotes a **main execution line** with special cases handled. It suggest polimorphism to handle complex conditional cases, making the code more explicit. We can use NULL object pattern to express that a result has no value.*
+**2. Don't use the "else" keyword**
 
-3. Wrap all primitives and string
+It promotes a **main execution line** with special cases handled. It suggest polimorphism to handle complex conditional cases, making the code more explicit. We can use NULL object pattern to express that a result has no value.
 
-    *No arguments of public methods should be primitives, except constructors. Also no return value should be a primitive, for public methods. Instead of primitives, we must **create a class to describe the concept and contain its behaviours**.* 
+**3. Wrap all primitives and string**
 
-4. First class collections
+No arguments of public methods should be primitives, except constructors. Also no return value should be a primitive, for public methods. Instead of primitives, we must **create a class to describe the concept and contain its behaviours**.
 
-    *No arguments of public methods should be primitive collections (array, hash, tables, etc.). We must **create a class to handle that collection** and the behaviour of going throught its values.*
+**4. First class collections**
 
-5. No getters/setters/properties 
+No arguments of public methods should be primitive collections (array, hash, tables, etc.). We must **create a class to handle that collection** and the behaviour of going throught its values.
 
-    *We follow the original idea of OOP as a network of entities collaborating by passing messages each other. Don't ask data and then act on it; instead, **tell the object what you need it to do for you**. Data Structures and Objects have different responsibilities.* 
+**5. No getters/setters/properties **
 
-6. One dot per line
+We follow the original idea of OOP as a network of entities collaborating by passing messages each other. Don't ask data and then act on it; instead, **tell the object what you need it to do for you**. Data Structures and Objects have different responsibilities.
 
-    *Avoid situations like `dog→body()→tail()→wag()` with a chain of calls, because that's strictly coupled with classes very far from the caller. **The caller here know only the Dog class and should talk only to it**, so for example we could have a method `dog→expressHappiness()` to encapsulate that behaviour.* 
+**6. One dot per line**
 
-7. Don't abbreviate
+Avoid situations like `dog→body()→tail()→wag()` with a chain of calls, because that's strictly coupled with classes very far from the caller. **The caller here know only the Dog class and should talk only to it**, so for example we could have a method `dog→expressHappiness()` to encapsulate that behaviour. 
 
-    ***Always make name explicit**, even if it cost a long name: no need to save characters. Abbreviations can only lead to misunderstanding and a code hard to be read.* 
+**7. Don't abbreviate**
 
-8. Keep all entities small
+**Always make name explicit**, even if it cost a long name: no need to save characters. Abbreviations can only lead to misunderstanding and a code hard to be read.
 
-    *Small classes tend to be focused on **doing just one thing**, improving single responsibility and the reusability and readability of that code. Use packages/namespaces to cluster related classes. Also packages should be small in order to have a clear purpose.* 
+**8. Keep all entities small**
 
-9. No classes with more than 2 instance variables
+Small classes tend to be focused on **doing just one thing**, improving single responsibility and the reusability and readability of that code. Use packages/namespaces to cluster related classes. Also packages should be small in order to have a clear purpose.
 
-    ***The more instance variables, the lower is the cohesion within the class**. Classes with more than one parameters are usually orchestrators, those with only one are actuators.* 
+**9. No classes with more than 2 instance variables**
 
-10. All classes must have state
+The more instance variables, the lower is the cohesion within the class. Classes with more than one parameters are usually orchestrators, those with only one are actuators.
 
-    No static methods should be used, avoid creating utility classes that collect some random behaviours together. Create classes with clear responsibility and a state to maintain. This will force you to create a network of collaborators that expose the required behaviours but hide their state.
+**10. All classes must have state**
+
+No static methods should be used, avoid creating utility classes that collect some random behaviours together. Create classes with clear responsibility and a state to maintain. This will force you to create a network of collaborators that expose the required behaviours but hide their state.
