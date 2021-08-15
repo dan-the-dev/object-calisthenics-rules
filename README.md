@@ -22,6 +22,10 @@ There are two euristics beyond those rules:
 ## Object Calisthenics rules
 
 ![image info](./object_calisthenics_rules_infographic.pdf)
+<object data="./object_calisthenics_rules_infographic.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="./object_calisthenics_rules_infographic.pdf">
+    </embed>
+</object>
 
 1. Only one level of indentation per method
 
