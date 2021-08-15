@@ -23,8 +23,29 @@ There are two euristics beyond those rules:
 
 1. Only one level of indentation per method
 
-    *You should only keep one level of indentation per method, avoiding the nest of commands; it helps to ensure that a method focuses on doing **only one thing** and reduce the size of methods, enabling easier reuse.* 
+    *You should only keep one level of indentation per method, avoiding the nest of commands; it helps to ensure that a method focuses on doing **only one thing** and reduce the size of methods, enabling easier reuse. This approach favors readability and simplicity, resulting in methods with a main line for their main responsibilities, ending in the last line of method, and some special cases handled in the path. A techniques to avoid levels of indentetation is using guards to create an exit for special cases:* 
 
+	class Example {
+		public function isBetween0And10(int $a) {
+			if ($a > 0) {
+				if ($a < 10) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+
+
+	class Example {
+		public function isBetween1And10/int $a) {
+			if ($a < 0 || $a > 10) {
+				// this is a guard: a conditional that makes a control and returns if it does not pass
+				return false;
+			}
+			return true;
+		}
+	}
 2. Don't use the "else" keyword
 
     *It promotes a **main execution line** with special cases handled. It suggest polimorphism to handle complex conditional cases, making the code more explicit. We can use NULL object pattern to express that a result has no value.*
