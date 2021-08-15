@@ -1,24 +1,25 @@
 # Object Calisthenics Rules
+
+## Introduction
 A repository from [DAN-THE-DEV](https://www.linkedin.com/in/daniele-scillia/) to learn Object Calisthenics rules and see some examples about them in some different languages.
 
-When it comes to Object Oriented programming, it's easy to make mistakes; with Object Calisthenics you have some rules that you can use to bring the fundamentals of the best practices of this paradigm. 
+## What is Object Calisthenics
+When it comes to Object Oriented programming, it's easy to make mistakes; with Object Calisthenics you have some rules that you can use to bring the fundamentals of the best practices of this paradigm. Object Calisthenics rules born with the objective of preventing Code Smells. 
 
-**Object Calisthenics** is about constraining software design decision: it's not about what you can do, **it's about what you cannot do**. 
+**Object Calisthenics** is about constraining software design decision: it's not about what you can do, but more about **what you cannot do**. 
 
 Why do we need to consider design important: 
 
 - TDD is not enough: it definitely has positive side effects on design, but will not take care of design by itself
-- DRY is not enough: refactoring efforts cannot be put only on removing duplication
-- TDD punish you if you don't understand design: if writing a test become complex, design need an improvement
+- DRY is not enough: refactoring efforts cannot be put only on removing duplication, we need more than that
+- TDD punish you if you don't understand design: if writing a test become complex, it's a clear feedback that design need an improvement
 
-### Object Calisthenics rules
+There are two euristics beyond those rules: 
 
-The heuristics beyond those rules are mainly two: 
+- **Tell, don't ask:** tell object to perform actions instead of asking them for data to be process outside of it; this comes from the original idea of Object Oriented programming of having objects communicate with each other via messages
+- **Law of Demeter:** aka "don't talk with strangers", each component should only talk to its close friends in order to favor simplicity
 
-- **Tell, don't ask:** tell object to perform actions instead of asking them for data to be process outside of it
-- **Law of Demeter:** aka "don't talk with strangers", each component should only talk to its close friends
-
-**Here are the 10 rules:** 
+## Object Calisthenics rules
 
 1. Only one level of indentation per method
 
