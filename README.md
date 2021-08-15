@@ -23,7 +23,7 @@ There are two euristics beyond those rules:
 
 1. Only one level of indentation per method
 
-    *It helps to ensure that a method focuses on doing **only one things** and reduce the size of methods, enabling easier reuse.*
+    *You should only keep one level of indentation per method, avoiding the nest of commands; it helps to ensure that a method focuses on doing **only one thing** and reduce the size of methods, enabling easier reuse.* 
 
 2. Don't use the "else" keyword
 
