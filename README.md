@@ -93,6 +93,25 @@ class Example {
 
 No arguments of public methods should be primitives, except constructors. Also no return value should be a primitive, for public methods. Instead of primitives, we must **create a class to describe the concept and contain its behaviours**.
 
+```php
+/** AVOID THIS */
+class Shop {
+	public function buy(int $money, string $productId) {
+		// do something
+	}
+}
+```
+We should always create classes that describe and represent business concepts we need:
+	
+```php
+/** DO THIS INSTEAD */
+class Shop {
+	public function buy(Money $money, Product $product) {
+		// do something
+	}
+}
+```
+
 **4. First class collections**
 
 No arguments of public methods should be primitive collections (array, hash, tables, etc.). We must **create a class to handle that collection** and the behaviour of going throught its values.
