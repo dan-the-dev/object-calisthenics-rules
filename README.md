@@ -242,6 +242,29 @@ Small classes tend to be focused on **doing just one thing**, improving single r
 
 The more instance variables, the lower is the cohesion within the class. Classes with more than one parameters are usually orchestrators, those with only one are actuators.
 
+```php
+/** AVOID THIS */
+class Example {	
+	public function __construct(string $firstName, string $lastName, string $email, string $password) { /** ... */ }
+}
+```
+We should always create classes that describe and represent the list concepts we need:
+	
+```php
+/** DO THIS INSTEAD */
+class Example {	
+	public function __construct(PersonalData $personalData, LoginData $loginData) { /** ... */ }
+}
+
+class PersonalData {
+	public function __construct(string $firstName, string $lastName) { /** ... */ }
+}
+
+class LoginData {
+	public function __construct(string $email, string $password) { /** ... */ }
+}
+```
+
 **10. All classes must have state**
 
 No static methods should be used, avoid creating utility classes that collect some random behaviours together. Create classes with clear responsibility and a state to maintain. This will force you to create a network of collaborators that expose the required behaviours but hide their state.
