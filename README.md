@@ -176,6 +176,43 @@ class User {
 
 Avoid situations like `dog→body()→tail()→wag()` with a chain of calls, because that's strictly coupled with classes very far from the caller. **The caller here know only the Dog class and should talk only to it**, so for example we could have a method `dog→expressHappiness()` to encapsulate that behaviour. 
 
+```php
+/** AVOID THIS */
+class Dog {
+	private DogBody $body;
+	
+	public function body(): DogBody { return $this->body; }
+}
+
+class DogBody {
+	private DogTail $tail;
+	
+	public function tail(): DogTail { return $this->tail; }
+}
+
+class DogTail {	
+	public function wag(): void { /** wag the tail action */ }
+}
+
+// used somewhere
+$dog = new Dog();
+$dog->body()->tail()->wag();
+```
+We should always create classes that describe and represent the list concepts we need:
+	
+```php
+/** DO THIS INSTEAD */
+class Dog {
+	private DogBody $body;
+	
+	public function expressHappiness(): void { return $this->body->wagTail(); }
+}
+
+// used somewhere
+$dog = new Dog();
+$dog->expressHappiness();
+```
+
 **7. Don't abbreviate**
 
 **Always make name explicit**, even if it cost a long name: no need to save characters. Abbreviations can only lead to misunderstanding and a code hard to be read.
