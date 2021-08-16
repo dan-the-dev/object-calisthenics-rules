@@ -217,6 +217,23 @@ $dog->expressHappiness();
 
 **Always make name explicit**, even if it cost a long name: no need to save characters. Abbreviations can only lead to misunderstanding and a code hard to be read.
 
+```php
+/** AVOID THIS */
+class Calc {	
+	public function calcSumTwoNums() { /** */ }
+}
+```
+We should always create classes that describe and represent the list concepts we need:
+	
+```php
+/** DO THIS INSTEAD */
+class Calculator {	
+	public function calculateSumOfTwoNumbers() { /** */ }
+}
+
+// sum would be a good name for this method, just made an example to show problems with abbreviations.
+```
+
 **8. Keep all entities small**
 
 Small classes tend to be focused on **doing just one thing**, improving single responsibility and the reusability and readability of that code. Use packages/namespaces to cluster related classes. Also packages should be small in order to have a clear purpose.
