@@ -61,7 +61,33 @@ class Example {
 
 **2. Don't use the "else" keyword**
 
-It promotes a **main execution line** with special cases handled. It suggest polimorphism to handle complex conditional cases, making the code more explicit. We can use NULL object pattern to express that a result has no value.
+Avoiding the **else** keyword promotes a **main execution line** with special cases handled. It suggest polimorphism to handle complex conditional cases, making the code more explicit. We can use NULL object pattern to express that a result has no value.
+
+```php
+/** AVOID THIS */
+class Example {
+	public function doSomething(int $a) {
+		if ($a < 0) {
+			// do something
+		} else {
+			// handle special case
+		}
+	}
+}
+```
+We can create **guards** to eliminate else command and improve readability of our code:
+	
+```php
+/** DO THIS INSTEAD */
+class Example {
+	public function doSomething(int $a) {
+		if ($a > 0) {
+			// guard to handle special case
+		}
+		// do something
+	}
+}
+```
 
 **3. Wrap all primitives and string**
 
