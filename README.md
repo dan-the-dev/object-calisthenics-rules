@@ -99,7 +99,7 @@ No arguments of public methods should be primitives, except constructors. Also n
 
 ```php
 /** AVOID THIS */
-class Shop {
+class WrongShop {
  public function buy(int $money, string $productId) {
   // do something
  }
@@ -110,7 +110,7 @@ We should always create classes that describe and represent business concepts we
 
 ```php
 /** DO THIS INSTEAD */
-class Shop {
+class CorrectShop {
  public function buy(Money $money, Product $product) {
   // do something
  }
@@ -123,7 +123,7 @@ No arguments of public methods should be primitive collections (array, hash, tab
 
 ```php
 /** AVOID THIS */
-class League {
+class WrongLeague {
  public function newParticipants(array $newParticipantsList) {
   // do something
  }
@@ -134,7 +134,7 @@ We should always create classes that describe and represent the list concepts we
 
 ```php
 /** DO THIS INSTEAD */
-class League {
+class CorrectLeague {
  public function newParticipants(Participants $newParticipants) {
   // do something
  }
@@ -149,7 +149,7 @@ We follow the original idea of OOP as a network of entities collaborating by pas
 
 ```php
 /** AVOID THIS */
-class User {
+class WrongUser {
  public Id $id;
  public Email $email;
  public Password $password;
@@ -185,24 +185,23 @@ Avoid situations like `dog→body()→tail()→wag()` with a chain of calls, bec
 
 ```php
 /** AVOID THIS */
-class Dog {
- private DogBody $body;
- 
- public function body(): DogBody { return $this->body; }
+class WrongDog {
+    private WrongDogBody $body;
+
+    public function body(): WrongDogBody { return $this->body; }
 }
 
-class DogBody {
- private DogTail $tail;
- 
- public function tail(): DogTail { return $this->tail; }
+class WrongDogBody {
+    private WrongDogTail $tail;
+
+    public function tail(): WrongDogTail { return $this->tail; }
 }
 
-class DogTail { 
- public function wag(): void { /** wag the tail action */ }
+class WrongDogTail { 
+    public function wag(): void { /** wag the tail action */ }
 }
-
 // used somewhere
-$dog = new Dog();
+$dog = new WrongDog();
 $dog->body()->tail()->wag();
 ```
 
@@ -211,9 +210,13 @@ We should always create classes that describe and represent the list concepts we
 ```php
 /** DO THIS INSTEAD */
 class Dog {
- private DogBody $body;
- 
- public function expressHappiness(): void { return $this->body->wagTail(); }
+    private DogBody $body;
+    
+    public function expressHappiness(): void { return $this->body->wagTail(); }
+}
+
+class DogBody {
+    public function wagTail(): void { /** do something */ return; }
 }
 
 // used somewhere
