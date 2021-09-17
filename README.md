@@ -261,20 +261,12 @@ class Example {
 }
 ```
 
-We should always create classes that describe and represent the list concepts we need:
+We should always create classes that describe and represent the concepts we need:
 
 ```php
 /** DO THIS INSTEAD */
 class Example { 
  public function __construct(PersonalData $personalData, LoginData $loginData) { /** ... */ }
-}
-
-class PersonalData {
- public function __construct(string $firstName, string $lastName) { /** ... */ }
-}
-
-class LoginData {
- public function __construct(string $email, string $password) { /** ... */ }
 }
 ```
 
