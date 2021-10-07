@@ -6,15 +6,19 @@ A repository from [DAN-THE-DEV](https://www.linkedin.com/in/daniele-scillia/) to
 
 ## What is Object Calisthenics
 
-When it comes to Object Oriented programming, it's easy to make mistakes; with Object Calisthenics you have some rules that you can use to bring the fundamentals of the best practices of this paradigm. Object Calisthenics rules born with the objective of preventing Code Smells.
+When it comes to Object Oriented programming, it's easy to make mistakes; with Object Calisthenics you have some rules that you can use to bring the fundamentals of the best practices of this paradigm. The original idea of Object Oriented programming is to create a system of objects, communicating with each other only via messages.  
+
+Object Calisthenics rules born with the objective of preventing Code Smells. [Code smells](https://refactoring.guru/refactoring/smells) are characteristics you can recognize in a codebase that indicates deeper problems in the design, like violation of fundamental design principles. The terms comes from the idea that these pieces of code are recognizable, like if they stink. 
 
 **Object Calisthenics** is about constraining software design decision: it's not about what you can do, but more about **what you cannot do**.
 
+> The term **Calisthenics** refers to a form of *strength training*; the name comes from two greek words: "*kalòs*", which means *beautiful*, and "*sthènos*", which means *strength*. Main characteristics of this sport are that it can be practiced with none or very minimal equipment and its difficulty can be progressively increased to adapt to different level of training. In software design, the parallelism is between our body and the design of our code: thanks to Calisthenics, our body will become stronger and more beautiful; thanks to Object Calisthenics, the design of our code will become stronger and more beautiful. More about this in my podcast episode [on Spotify](https://open.spotify.com/episode/6QDmrYmW40eWQpwfT89Mlh?si=8-tklNoSQOmSYwmGekDy5A&dl_branch=1).
+
 Why do we need to consider design important:
 
-- TDD is not enough: it definitely has positive side effects on design, but will not take care of design by itself
-- DRY is not enough: refactoring efforts cannot be put only on removing duplication, we need more than that
-- TDD punish you if you don't understand design: if writing a test become complex, it's a clear feedback that design need an improvement
+- **Test-Driven Development (TDD) is not enough**: it definitely has positive side effects on design, but will not take care of design by itself
+- **Don't Repeat Yourself (DRY) principle is not enough**: refactoring efforts cannot be put only on removing duplication, we need more than that
+- **TDD punish you if you don't understand design**: if writing a test become complex, it's a clear feedback that design need an improvement
 
 There are two euristics beyond those rules:
 
@@ -79,7 +83,7 @@ class WrongExample {
 }
 ```
 
-We can create **guards** to eliminate else command and improve readability of our code:
+We can create **guards** to eliminate else command and improve readability of our code; a guard is an `if` that handle a special case and then return something, avoiding the execution of following code:
 
 ```php
 /** DO THIS INSTEAD */
@@ -87,6 +91,7 @@ class CorrectExample {
  public function doSomething(int $a) {
   if ($a > 0) {
    // guard to handle special case
+   return;
   }
   // do something
  }
@@ -114,6 +119,11 @@ class CorrectShop {
  public function buy(Money $money, Product $product) {
   // do something
  }
+}
+
+class Money {
+ public function convert(Currency $from, Currency $to) { /** ... */ }
+ public function __toString() { /** ... for example a specific format like "$ 1.000,00" */ }
 }
 ```
 
